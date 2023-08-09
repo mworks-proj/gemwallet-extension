@@ -1,123 +1,100 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DoneIcon from '@mui/icons-material/Done';
+import { Tooltip, IconButton, Typography } from '@mui/material';
+import copyToClipboard from 'copy-to-clipboard';
 import QRCode from 'qrcode.react';
+import { useNavigate } from 'react-router-dom';
 
-import { HEADER_HEIGHT, NAV_MENU_HEIGHT } from '../../../constants';
 import { useWallet } from '../../../contexts';
-import { Header, NavMenu } from '../../organisms';
+import { truncateAddress } from '../../../utils';
+import { InformationMessage } from '../../molecules';
+import { PageWithReturn } from '../../templates';
 
-const MARGIN_TOP_CONTAINER = 20;
-const CONTAINER_HEIGHT_TAKEN = HEADER_HEIGHT + NAV_MENU_HEIGHT + MARGIN_TOP_CONTAINER;
-
-export interface ReceivePaymentProps {
-  title?: string;
-}
-
-export const ReceivePayment: FC<ReceivePaymentProps> = ({ children, title }) => {
+export const ReceivePayment: FC = () => {
   const { wallets, selectedWallet } = useWallet();
-  const publicAddress = wallets[selectedWallet].publicAddress;
+  const navigate = useNavigate();
 
   const [isCopied, setIsCopied] = useState(false);
-  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(publicAddress);
+  const publicAddress = useMemo(
+    () => wallets[selectedWallet]?.publicAddress,
+    [selectedWallet, wallets]
+  );
+  const truncatedAddress = useMemo(() => truncateAddress(publicAddress), [publicAddress]);
+
+  const handleCopy = useCallback(() => {
+    if (publicAddress) {
+      copyToClipboard(publicAddress);
       setIsCopied(true);
-      const id = setTimeout(() => setIsCopied(false), 3000);
-      setTimeoutId(id);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
+      setTimeout(() => setIsCopied(false), 2000); // 2 seconds
     }
-  };
-
-  useEffect(() => {
-    return () => {
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [timeoutId]);
-
-  const abbreviateAddress = (address: string, maxLength = 8) => {
-    if (address.length <= maxLength) return address;
-    const halfLength = Math.floor(maxLength / 2);
-    return address.slice(0, halfLength) + '...' + address.slice(-halfLength);
-  };
+  }, [publicAddress]);
 
   if (!wallets?.[selectedWallet]) {
-    return null;
+    return (
+      <InformationMessage title="Wallet not found">
+        <div style={{ marginBottom: '5px' }}>Sorry we couldn't find your wallet</div>
+      </InformationMessage>
+    );
   }
 
   return (
-    <>
-      <Header wallet={wallets[selectedWallet]} />
-      <Container
-        component="main"
+    <PageWithReturn
+      title="Receive Payment"
+      onBackClick={() => navigate(-1)}
+      style={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around'
+      }}
+    >
+      <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          height: `calc(100vh - ${CONTAINER_HEIGHT_TAKEN}px)`,
-          margin: `${MARGIN_TOP_CONTAINER}px auto 0 auto`,
-          overflowY: 'auto'
+          alignItems: 'center'
         }}
       >
-        {title && (
-          <Typography variant="h5" component="h1" align="center" gutterBottom>
-            {title}
-          </Typography>
-        )}
-        <div
+        <QRCode
+          value={publicAddress}
+          size={220}
+          level="M"
           style={{
+            marginTop: '30px',
+            borderRadius: '2px',
+            overflow: 'hidden',
+            backgroundColor: '#ffffff',
             display: 'flex',
-            flexDirection: 'column',
+            justifyContent: 'center',
             alignItems: 'center',
-            padding: '20px'
+            padding: '8px'
           }}
-        >
-          <div
-            style={{
-              marginTop: '30px',
-              borderRadius: '2px',
-              overflow: 'hidden',
-              backgroundColor: '#ffffff',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '8px'
-            }}
-          >
-            <QRCode value={publicAddress} size={220} level="M" />
-          </div>
-          <Typography
-            variant="body1"
-            style={{
-              margin: '10px'
-            }}
-          >
-            {abbreviateAddress(publicAddress)}
+        />
+
+        <div style={{ display: 'flex', alignItems: 'center', margin: '10px 0' }}>
+          <Typography variant="body1" data-testid="receive-payment-address">
+            {truncatedAddress}
           </Typography>
-          <Tooltip title={isCopied ? 'Copied!' : 'Click to copy'}>
-            <div
-              style={{
-                alignContent: 'center',
-                justifyContent: 'center',
-                margin: '5px'
-              }}
+          <Tooltip title="Copy your address" data-testid="receive-payment-copy">
+            <IconButton
+              size="small"
+              edge="end"
+              color="inherit"
+              aria-label="Copy"
+              onClick={handleCopy}
             >
-              <Button variant="contained" color="primary" onClick={handleCopy}>
-                {isCopied ? 'Copied!' : 'Copy'}
-              </Button>
-            </div>
+              {isCopied ? (
+                <DoneIcon sx={{ fontSize: '0.9rem' }} color="success" />
+              ) : (
+                <ContentCopyIcon sx={{ fontSize: '0.9rem' }} />
+              )}
+            </IconButton>
           </Tooltip>
         </div>
-        {children}
-      </Container>
-      <NavMenu />
-    </>
+      </div>
+    </PageWithReturn>
   );
 };
-
-export default ReceivePayment;

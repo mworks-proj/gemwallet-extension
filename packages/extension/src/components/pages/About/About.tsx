@@ -5,7 +5,6 @@ import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/mat
 import { useNavigate } from 'react-router-dom';
 
 import {
-  ANNOUNCEMENT_LINK,
   DISCORD_LINK,
   DOCUMENTATION_LINK,
   FEEDBACK_LINK,
@@ -25,10 +24,6 @@ const aboutLinks = [
   {
     name: 'GemWallet Documentation',
     url: DOCUMENTATION_LINK
-  },
-  {
-    name: 'GemWallet Announcement',
-    url: ANNOUNCEMENT_LINK
   },
   {
     name: 'GemWallet GitHub',
@@ -67,9 +62,9 @@ export const About: FC = () => {
         </Typography>
       </div>
       <Typography style={{ marginTop: '0.25rem' }}>
-        GemWallet is a non-custodial wallet extension that allows you to make online payments with
-        one click on the XRPL. Our vision is oriented toward payments, micro-payments and payment
-        streaming.
+        GemWallet takes you into the world of the XRP Ledger. As a fully decentralized,
+        browser-based extension, GemWallet ensures fast transactions and seamless interaction with
+        Web3 applications.
       </Typography>
       <div style={{ marginTop: '1rem' }}>
         <Typography variant="subtitle2">Links</Typography>

@@ -1,7 +1,9 @@
 # 💎 GemWallet Extension
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## GemWallet: A crypto wallet & Web3 layer for the XRPL
@@ -127,12 +129,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/markibanez"><img src="https://avatars.githubusercontent.com/u/7534847?v=4?s=100" width="100px;" alt="Mark Ibanez"/><br /><sub><b>Mark Ibanez</b></sub></a><br /><a href="https://github.com/GemWallet/gemwallet-extension/issues?q=author%3Amarkibanez" title="Bug reports">🐛</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/florent-uzio"><img src="https://avatars.githubusercontent.com/u/36513774?v=4?s=100" width="100px;" alt="Florent"/><br /><sub><b>Florent</b></sub></a><br /><a href="https://github.com/GemWallet/gemwallet-extension/issues?q=author%3Aflorent-uzio" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/florent-uzio"><img src="https://avatars.githubusercontent.com/u/36513774?v=4?s=100" width="100px;" alt="Florent"/><br /><sub><b>Florent</b></sub></a><br /><a href="https://github.com/GemWallet/gemwallet-extension/issues?q=author%3Aflorent-uzio" title="Bug reports">🐛</a> <a href="#ideas-florent-uzio" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/benaor"><img src="https://avatars.githubusercontent.com/u/58249772?v=4?s=100" width="100px;" alt="Benjamin"/><br /><sub><b>Benjamin</b></sub></a><br /><a href="https://github.com/GemWallet/gemwallet-extension/commits?author=benaor" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/rikublock"><img src="https://avatars.githubusercontent.com/u/46352032?v=4?s=100" width="100px;" alt="Riku"/><br /><sub><b>Riku</b></sub></a><br /><a href="https://github.com/GemWallet/gemwallet-extension/issues?q=author%3Arikublock" title="Bug reports">🐛</a> <a href="#ideas-rikublock" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/GemWallet/gemwallet-extension/commits?author=rikublock" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tfevre"><img src="https://avatars.githubusercontent.com/u/114390906?v=4?s=100" width="100px;" alt="tfevre"/><br /><sub><b>tfevre</b></sub></a><br /><a href="https://github.com/GemWallet/gemwallet-extension/issues?q=author%3Atfevre" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/afolabisunday/"><img src="https://avatars.githubusercontent.com/u/31351334?v=4?s=100" width="100px;" alt="Afolabi Sunday"/><br /><sub><b>Afolabi Sunday</b></sub></a><br /><a href="#ideas-garantor" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/GemWallet/gemwallet-extension/issues?q=author%3Agarantor" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/qlemaire"><img src="https://avatars.githubusercontent.com/u/29045289?v=4?s=100" width="100px;" alt="Quentin Lemaire"/><br /><sub><b>Quentin Lemaire</b></sub></a><br /><a href="#security-qlemaire" title="Security">🛡️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mworks-proj"><img src="https://avatars.githubusercontent.com/u/78353166?v=4?s=100" width="100px;" alt="meister"/><br /><sub><b>meister</b></sub></a><br /><a href="https://github.com/GemWallet/gemwallet-extension/commits?author=mworks-proj" title="Code">💻</a> <a href="#ideas-mworks-proj" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>

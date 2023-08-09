@@ -29,9 +29,20 @@ describe('Switch networks', () => {
           sendMessage(message, cb) {}
         };
 
+        (win as any).chrome.storage = {
+          local: {
+            get(key, cb) {},
+            set(obj, cb) {
+              if (cb) cb();
+            }
+          }
+        };
+
         cy.stub((win as any).chrome.runtime, 'sendMessage').resolves({});
       }
     });
+
+    cy.get('.MuiCircularProgress-root', { timeout: 20000 }).should('not.exist');
 
     // Login
     cy.get('input[name="password"]').type(PASSWORD);

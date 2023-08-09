@@ -7,7 +7,7 @@ import OutboundIcon from '@mui/icons-material/Outbound';
 import { AppBar, Box, Button, IconButton, Toolbar, Tooltip, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import copyToClipboard from 'copy-to-clipboard';
-import { Link } from 'react-router-dom'; // Import the Link component for navigation
+// Import the Link component for navigation
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -15,7 +15,7 @@ import {
   LIST_WALLETS_PATH,
   SECONDARY_GRAY,
   SEND_PATH,
-  RECEIVE_PATH // Import the receive path
+  RECEIVE_PATH
 } from '../../../constants';
 import { useTimeout } from '../../../hooks';
 import { WalletLedger } from '../../../types';
@@ -53,6 +53,10 @@ export const Header: FC<HeaderProps> = ({ wallet: { name, publicAddress } }) => 
     navigate(SEND_PATH);
   }, [navigate]);
 
+  const handleReceive = useCallback(() => {
+    navigate(RECEIVE_PATH);
+  }, [navigate]);
+
   const onWalletIconClick = useCallback(() => {
     navigate(LIST_WALLETS_PATH);
   }, [navigate]);
@@ -82,7 +86,7 @@ export const Header: FC<HeaderProps> = ({ wallet: { name, publicAddress } }) => 
             />
             <NetworkIndicator />
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <Typography variant="body2" style={{ marginTop: '10px' }}>
                 {truncateWalletName(name, 22)}
@@ -108,28 +112,27 @@ export const Header: FC<HeaderProps> = ({ wallet: { name, publicAddress } }) => 
                 </Tooltip>
               </div>
             </div>
-            <Button
-              aria-label="send"
-              size="small"
-              onClick={handleSend}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
-              }}
-            >
-              <OutboundIcon
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Button
+                aria-label="send"
+                size="small"
+                onClick={handleSend}
                 style={{
-                  transform: 'rotate(-45deg)',
-                  color: 'white'
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
                 }}
-              />
-              <Typography color="white" variant="caption">
-                Send
-              </Typography>
-            </Button>
-            {/* Instead of showing the QR code here, navigate to the /receive route */}
-            <Link to={RECEIVE_PATH} style={{ textDecoration: 'none' }}>
+              >
+                <OutboundIcon
+                  style={{
+                    transform: 'rotate(-45deg)',
+                    color: 'white'
+                  }}
+                />
+                <Typography color="white" variant="caption">
+                  Send
+                </Typography>
+              </Button>
               <Button
                 aria-label="receive"
                 size="small"
@@ -138,6 +141,7 @@ export const Header: FC<HeaderProps> = ({ wallet: { name, publicAddress } }) => 
                   flexDirection: 'column',
                   alignItems: 'center'
                 }}
+                onClick={handleReceive}
               >
                 <OutboundIcon
                   style={{
@@ -149,7 +153,7 @@ export const Header: FC<HeaderProps> = ({ wallet: { name, publicAddress } }) => 
                   Receive
                 </Typography>
               </Button>
-            </Link>
+            </div>
           </div>
         </StyledToolbar>
       </AppBar>
